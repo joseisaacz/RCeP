@@ -1,0 +1,14 @@
+public void IC(String _id){
+        Actividad a=(Actividad) actividades.get(_id);
+        if(!a.getId().equals("end")){
+        for (int i=0; i<a.getSucesoras().size();i++){
+            Actividad s=(Actividad)a.getSucesoras().get(i);
+            if (s.getIC() < a.getTC()) {
+                s.setIC(a.getDuracion() + a.getIC());
+            }
+            s.setTC(s.getIC() + s.getDuracion());
+            System.out.println(a.toString());
+            IC(s.getId());
+        }
+      }
+    }
