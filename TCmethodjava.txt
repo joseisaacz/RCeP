@@ -1,0 +1,21 @@
+public void TC(String _id) {
+        Actividad s = (Actividad) actividades.get(_id);
+        
+            for (int i = s.getAntecesoras().size(); i >0 ; i--) {
+                Actividad a = (Actividad) s.getAntecesoras().get(i-1);
+                if (!a.getId().equals("start")) {
+                if (s.getIL() == 0) {
+                    a.setTL(a.getTC());
+                    a.setIL(a.getTL() - a.getDuracion());
+                } else{
+                    if(a.getTL()>s.getIL()||a.getTL()==0){
+                        a.setTL(s.getTL()-s.getDuracion());
+                    }
+                    a.setIL(a.getTL()-a.getDuracion());
+                }
+
+//                System.out.println(a.toString());
+                TC(a.getId());
+            }
+        }
+    }
