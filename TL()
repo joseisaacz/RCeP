@@ -1,0 +1,33 @@
+private void setCont0(){
+    for(Map.Entry<String, Actividad> entry : actividades.entrySet()){
+        entry.getValue().cont=0;
+    }
+    //Puede llamar a este metodo al principio de TL() o cunado llama a CPM()
+
+
+
+
+    }
+        private void TL(String _id) {
+        Actividad act = (Actividad) actividades.get(_id);
+        
+            for (Actividad ant :(ArrayList<Actividad>) act.getAntecesoras()) {
+               
+                ant.cont++;
+
+                if (!ant.getId().equals("Start")) {
+                if (act.getIL() == 0) {
+                    ant.setTL(ant.getTC());
+                    ant.setIL(ant.getTL() - ant.getDuracion());
+                } else{
+                    if(ant.getTL()>act.getIL()||ant.getTL()==0){
+                        ant.setTL(act.getTL()-act.getDuracion());
+                    }
+                    ant.setIL(ant.getTL()-ant.getDuracion());
+                }
+                if(ant.cont==ant.getSucesoras().size()){
+                TL(ant.getId());
+                }
+            }
+        }
+    }
